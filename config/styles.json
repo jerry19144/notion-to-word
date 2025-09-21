@@ -1,0 +1,105 @@
+{
+  "templates": {
+    "ic_template": {
+      "name": "IC Corporate Template",
+      "path": "/Users/tristanmcinnis/Documents/L_Code/notion-to-word/IC Template.docx",
+      "font": "Aptos",
+      "style_mappings": {
+        "title": "Title",
+        "heading_1": "Heading 1",
+        "heading_2": "Heading 2",
+        "heading_3": "Heading 3",
+        "heading_4": "Heading 4",
+        "heading_5": "Heading 5",
+        "paragraph": "Normal",
+        "bulleted_list_item": "Normal",
+        "numbered_list_item": "Normal",
+        "to_do": "Normal",
+        "toggle": "Normal",
+        "code": "Normal",
+        "quote": "Normal",
+        "callout": "Normal",
+        "divider": "Normal",
+        "table": "Normal",
+        "image": "Normal",
+        "default": "Normal"
+      },
+      "formatting": {
+        "title_alignment": "center",
+        "title_size": 16,
+        "code_font": "Courier New",
+        "code_size": 10,
+        "metadata_size": 10,
+        "metadata_color": "#666666",
+        "bullet_symbol": "•",
+        "checkbox_checked": "☑",
+        "checkbox_unchecked": "☐",
+        "toggle_symbol": "▶",
+        "quote_left": "\u201c",
+        "quote_right": "\u201d"
+      }
+    },
+    "default": {
+      "name": "Default Template",
+      "path": null,
+      "font": "Calibri",
+      "style_mappings": {
+        "title": "Title",
+        "heading_1": "Heading 1",
+        "heading_2": "Heading 2",
+        "heading_3": "Heading 3",
+        "paragraph": "Normal",
+        "default": "Normal"
+      },
+      "formatting": {
+        "title_alignment": "center",
+        "title_size": 18,
+        "code_font": "Courier New",
+        "code_size": 10,
+        "metadata_size": 10,
+        "metadata_color": "#808080",
+        "bullet_symbol": "•",
+        "checkbox_checked": "☑",
+        "checkbox_unchecked": "☐",
+        "toggle_symbol": "▶",
+        "quote_left": "\u201c",
+        "quote_right": "\u201d"
+      }
+    }
+  },
+  "notion_block_types": [
+    "paragraph",
+    "heading_1",
+    "heading_2",
+    "heading_3",
+    "heading_4",
+    "heading_5",
+    "heading_6",
+    "bulleted_list_item",
+    "numbered_list_item",
+    "to_do",
+    "toggle",
+    "code",
+    "quote",
+    "callout",
+    "divider",
+    "table",
+    "table_row",
+    "image",
+    "video",
+    "file",
+    "pdf",
+    "bookmark",
+    "embed",
+    "equation",
+    "synced_block",
+    "link_preview",
+    "child_page",
+    "child_database"
+  ],
+  "style_fallback_chain": [
+    "Try exact style name from mapping",
+    "Try 'Normal' style",
+    "Use default paragraph with no style"
+  ]
+}

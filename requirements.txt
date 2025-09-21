@@ -1,0 +1,6 @@
+notion-client==2.2.1
+python-docx==1.1.2
+markdown2==2.5.0
+beautifulsoup4==4.12.3
+requests==2.32.3
+python-dotenv==1.0.1
