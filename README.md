@@ -45,7 +45,7 @@
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Clone and setup
-git clone https://github.com/yourusername/notion-to-word.git
+git clone https://github.com/tristan-mcinnis/notion-to-word.git
 cd notion-to-word
 uv sync
 
@@ -57,7 +57,7 @@ cp .env.example .env
 #### Option 2: pip (Traditional)
 
 ```bash
-git clone https://github.com/yourusername/notion-to-word.git
+git clone https://github.com/tristan-mcinnis/notion-to-word.git
 cd notion-to-word
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
