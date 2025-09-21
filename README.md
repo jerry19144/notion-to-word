@@ -2,6 +2,8 @@
 
 # 📝 Notion to Word
 
+<img width="1024" height="1024" alt="Generated Image September 21, 2025 - 11_52AM" src="https://github.com/user-attachments/assets/71bd57a0-ec62-4f39-982c-de189fd63ccf" />
+
 **Convert your Notion pages to beautifully formatted Word documents**
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
