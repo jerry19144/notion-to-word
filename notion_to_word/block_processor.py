@@ -6,7 +6,9 @@ from typing import Dict, List, Any
 from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+import io
 import logging
+import requests
 
 from .notion_client import NotionClient
 from .word_formatter import WordFormatter
@@ -62,14 +64,16 @@ class BlockProcessor:
                 elif block_type == 'divider':
                     self.formatter.add_divider(doc, style_name)
                 elif block_type == 'image':
-                    self._add_image_placeholder(doc, block, style_name)
-                elif block_type in ['table', 'table_row']:
-                    self._add_table_placeholder(doc, block, style_name)
+                    self._add_image(doc, block, style_name)
+                elif block_type == 'table':
+                    self._add_table(doc, block)
+                elif block_type == 'table_row':
+                    pass  # handled inside _add_table
                 else:
                     self._add_unknown_block(doc, block, style_name)
 
-                # Process children if they exist
-                if block.get('has_children'):
+                # Process children if they exist (table blocks handle their own rows)
+                if block.get('has_children') and block_type not in ('table', 'table_row'):
                     children = self.notion.fetch_children_blocks(block['id'])
                     if children:
                         self.process_blocks(children, doc, style_mappings, level + 1)
@@ -207,27 +211,74 @@ class BlockProcessor:
 
         self.formatter.apply_rich_text_formatting(p, rich_text)
 
-    def _add_image_placeholder(self, doc: Document, block: Dict, style: str):
-        """Add an image placeholder"""
-        p = self.formatter.create_paragraph_safe(doc, "[Image]", style)
-        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        if p.runs:
-            p.runs[0].italic = True
+    def _add_image(self, doc: Document, block: Dict, style: str):
+        """Download and embed an image from a Notion image block"""
+        image_data = block.get('image', {})
+        image_type = image_data.get('type')
+
+        url = None
+        if image_type == 'file':
+            url = image_data.get('file', {}).get('url')
+        elif image_type == 'external':
+            url = image_data.get('external', {}).get('url')
+
+        embedded = False
+        if url:
+            try:
+                response = requests.get(url, timeout=30)
+                response.raise_for_status()
+                image_stream = io.BytesIO(response.content)
+                p = doc.add_paragraph()
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p.add_run().add_picture(image_stream, width=Inches(6))
+                embedded = True
+            except Exception as e:
+                logger.warning(f"Could not embed image from {url}: {e}")
+
+        if not embedded:
+            p = self.formatter.create_paragraph_safe(doc, "[Image could not be loaded]", style)
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            if p.runs:
+                p.runs[0].italic = True
 
         # Add caption if present
-        image_data = block.get('image', {})
         caption = image_data.get('caption', [])
         if caption:
             text = NotionClient.extract_text_from_rich_text(caption)
-            p.add_run(f"\n{text}")
-            if len(p.runs) > 1:
-                p.runs[-1].font.size = Pt(10)
+            cap_p = self.formatter.create_paragraph_safe(doc, text, style)
+            cap_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            for run in cap_p.runs:
+                run.font.size = Pt(10)
+                run.italic = True
 
-    def _add_table_placeholder(self, doc: Document, block: Dict, style: str):
-        """Add a table placeholder"""
-        p = self.formatter.create_paragraph_safe(doc, "[Table content - please view in Notion]", style)
-        if p.runs:
-            p.runs[0].italic = True
+    def _add_table(self, doc: Document, block: Dict):
+        """Build a Word table from a Notion table block"""
+        table_data = block.get('table', {})
+        table_width = table_data.get('table_width', 1)
+        has_column_header = table_data.get('has_column_header', False)
+
+        rows = self.notion.fetch_children_blocks(block['id'])
+        if not rows:
+            return
+
+        word_table = doc.add_table(rows=len(rows), cols=table_width)
+        word_table.style = 'Table Grid'
+
+        for row_idx, row_block in enumerate(rows):
+            if row_block.get('type') != 'table_row':
+                continue
+            cells = row_block.get('table_row', {}).get('cells', [])
+            for col_idx, cell_rich_text in enumerate(cells):
+                if col_idx >= table_width:
+                    break
+                cell_para = word_table.cell(row_idx, col_idx).paragraphs[0]
+                if cell_rich_text:
+                    self.formatter.apply_rich_text_formatting(cell_para, cell_rich_text)
+                if has_column_header and row_idx == 0:
+                    for run in cell_para.runs:
+                        run.bold = True
+
+        doc.add_paragraph()
 
     def _add_unknown_block(self, doc: Document, block: Dict, style: str):
         """Handle unknown block types"""
